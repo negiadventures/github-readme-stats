@@ -4,20 +4,23 @@
  <p align="center">Get dynamically generated GitHub stats on your READMEs!</p>
 </p>
   <p align="center">
-    <a href="https://github.com/anuraghazra/github-readme-stats/actions">
-      <img alt="Tests Passing" src="https://github.com/anuraghazra/github-readme-stats/workflows/Test/badge.svg" />
+    <a href="https://github.com/negiadventures/github-readme-stats/actions">
+      <img alt="Tests Passing" src="https://github.com/negiadventures/github-readme-stats/workflows/Test/badge.svg" />
     </a>
-    <a href="https://github.com/anuraghazra/github-readme-stats/graphs/contributors">
-      <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/anuraghazra/github-readme-stats" />
+    <a href="https://github.com/negiadventures/github-readme-stats/graphs/contributors">
+      <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/negiadventures/github-readme-stats" />
     </a>
-    <a href="https://codecov.io/gh/anuraghazra/github-readme-stats">
-      <img src="https://codecov.io/gh/anuraghazra/github-readme-stats/branch/master/graph/badge.svg" />
+    <a href="https://github.com/negiadventures/github-readme-stats/stargazers">
+      <img alt="GitHub Stars" src="https://img.shields.io/github/stars/negiadventures/github-readme-stats?style=social" />
     </a>
-    <a href="https://github.com/anuraghazra/github-readme-stats/issues">
-      <img alt="Issues" src="https://img.shields.io/github/issues/anuraghazra/github-readme-stats?color=0088ff" />
+    <a href="https://github.com/negiadventures/github-readme-stats/blob/master/LICENSE">
+      <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
     </a>
-    <a href="https://github.com/anuraghazra/github-readme-stats/pulls">
-      <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/anuraghazra/github-readme-stats?color=0088ff" />
+    <a href="https://github.com/negiadventures/github-readme-stats/issues">
+      <img alt="Issues" src="https://img.shields.io/github/issues/negiadventures/github-readme-stats?color=0088ff" />
+    </a>
+    <a href="https://github.com/negiadventures/github-readme-stats/pulls">
+      <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/negiadventures/github-readme-stats?color=0088ff" />
     </a>
     <br />
     <br />
@@ -94,6 +97,33 @@ Visit <https://indiafightscorona.giveindia.org> and make a small donation to hel
     -   [Wakatime Card Exclusive Option](#wakatime-card-exclusive-options)
 -   [Deploy Yourself](#deploy-on-your-own-vercel-instance)
     -   [Keep your fork up to date](#keep-your-fork-up-to-date)
+-   [Troubleshooting](#troubleshooting)
+
+# Installation & Quick Start
+
+## Using the hosted instance
+
+No installation required! Simply embed a stats card in your GitHub profile README:
+
+```md
+[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=YOUR_USERNAME)](https://github.com/negiadventures/github-readme-stats)
+```
+
+Replace `YOUR_USERNAME` with your GitHub username.
+
+## Self-hosted instance
+
+1. **Fork** this repository.
+2. **Deploy** to Vercel using the button below (or follow the [full deployment guide](./DEPLOYMENT.md)):
+
+   [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/negiadventures/github-readme-stats)
+
+3. **Add your PAT** as the `PAT_1` environment variable in your Vercel project settings.
+4. **Use your URL**: `https://your-project.vercel.app/api?username=YOUR_USERNAME`
+
+For detailed instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
+
 
 # GitHub Stats Card
 
@@ -549,6 +579,43 @@ However, if you are using this project and are happy with it or just want to enc
 -   [![paypal.me/anuraghazra](https://ionicabizau.github.io/badges/paypal.svg)](https://www.paypal.me/anuraghazra) - You can make one-time donations via PayPal. I'll probably buy a ~~coffee~~ tea. :tea:
 
 Thanks! :heart:
+
+* * *
+
+# Troubleshooting
+
+### My stats show incorrect data
+
+- Make sure your GitHub profile contributions are set to public.
+- If using a self-hosted instance, verify that your `PAT_1` token has the correct scopes (`read:user`, `repo`).
+- Language stats are based on public repository code — private repos are not included unless you [deploy your own instance](./DEPLOYMENT.md) with a PAT that has `repo` scope.
+
+### I see "Something went wrong" or "User not found"
+
+- Double-check that the `username` query parameter is correct.
+- Verify the GitHub API is not rate-limited. You can check your rate limit status at `https://api.github.com/rate_limit`.
+- If you're using a self-hosted instance, confirm your `PAT_1` environment variable is set correctly in Vercel.
+
+### The card is not updating
+
+- Cards are cached for 4 hours by default. Use `&cache_seconds=300` (minimum allowed is 14400 — 4 hours) for testing.
+- GitHub caches images through their CDN, which may extend the effective cache period.
+
+### Language card is inaccurate
+
+- The Top Languages card calculates based on the size of code in **public** repositories.
+- Use `exclude_repo=repo1,repo2` to exclude repositories that skew the results.
+- Use `hide=language1` to hide specific languages you don't want displayed.
+
+### Deploy issues
+
+See the [Deployment Guide](./DEPLOYMENT.md) for detailed setup instructions and common solutions.
+
+### More Help
+
+- Browse [open issues](https://github.com/negiadventures/github-readme-stats/issues) for known problems.
+- Check the [FAQ discussion](https://github.com/anuraghazra/github-readme-stats/discussions/1770) in the upstream repository.
+- Open a [new issue](https://github.com/negiadventures/github-readme-stats/issues/new/choose) if you find a bug.
 
 * * *
 

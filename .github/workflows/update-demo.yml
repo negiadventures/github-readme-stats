@@ -1,0 +1,40 @@
+name: Update Demo Images
+
+on:
+  schedule:
+    # Run every Sunday at 00:00 UTC
+    - cron: "0 0 * * 0"
+  workflow_dispatch:
+
+jobs:
+  update-demo:
+    name: Update demo screenshots
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run e2e tests to validate endpoints
+        run: npm run test:e2e
+        env:
+          PAT_1: ${{ secrets.PAT_1 }}
+        continue-on-error: true
+
+      - name: Commit updated demo assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || \
+            git commit -m "chore: update demo assets [skip ci]" && git push
